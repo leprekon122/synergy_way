@@ -1,0 +1,70 @@
+{% extends "main/layout.html" %}
+
+{% block title %}Main_page{% endblock %}
+{%block content%}
+<div class="container">
+    <div class="add_user">
+        <a class="btn btn-success" data-target="#AddUser" data-toggle="modal">Add_user</a>
+    </div>
+
+    <div class="modal" tabindex="-1" role="dialog" id="AddUser">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-dark">
+                    <h5 class="modal-title text-light">Add user</h5>
+                    <button type="button" class="btn btn-danger close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="post">
+                    {%csrf_token%}
+                    <div class="modal-body bg-primary text-light">
+                        {{form.as_p}}
+                    </div>
+                    <div class="modal-footer bg-dark">
+                        <button type="submit" class="btn btn-primary" name="add" value="add">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <div class="table">
+        <table class="table table-striped table-dark table-sm  table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>Username</th>
+                <th>Crated date</th>
+                <th>Groups</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            {% for el in model%}
+            <tbody>
+            <tr>
+                <th>{{el.id}}</th>
+                <th>{{el.username}}</th>
+                <th>{{el.created_date}}</th>
+                <th>{{el.groups__group}}</th>
+                <form method="get">
+                    {%csrf_token%}
+                    <th>
+                        <div class="user_buttons">
+                            <button class="btn btn-danger" type="submit" value="{{el.id}}" name="delete">delete_user
+                            </button>
+                            <a class="btn btn-warning" href="{% url 'user_update' el.id %}">Edit</a>
+                        </div>
+                    </th>
+                </form>
+            </tr>
+            </tbody>
+            {%endfor%}
+        </table>
+    </div>
+
+
+</div>
+{%endblock%}

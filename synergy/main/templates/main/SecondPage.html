@@ -1,0 +1,86 @@
+{% extends 'main/layout.html'%}
+
+{%block title%}Groups{%endblock%}
+
+{%block content%}
+<div class="container">
+    <div class="add_user">
+        <a class="btn btn-success" data-target="#Add_group" data-toggle="modal">Add_group</a>
+    </div>
+
+    <div class="modal" tabindex="-1" role="dialog" id="Add_group">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="post">
+                    {%csrf_token%}
+                    <div class="modal-body">
+                        {{form.as_p}}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <div class="table-group">
+        <table class="table table-dark table-sm table-striped table-bordered">
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            {%for el in model %}
+            <tbody>
+            <tr>
+                <th>{{el.id}}</th>
+                <th>{{el.group}}</th>
+                <form method="get">
+                    {%csrf_token%}
+                    <th>
+                        <div class="group_buttons">
+                            <button type="submit" class="btn btn-danger" name="delete_group" value="{{el.id}}">
+                                delete_group
+                            </button>
+                            <a class="btn btn-warning" href="{% url 'update_group' el.id %}">Edit</a>
+                        </div>
+                    </th>
+                </form>
+            </tr>
+            </tbody>
+            {%endfor%}
+        </table>
+        <div class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Modal body text goes here.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}

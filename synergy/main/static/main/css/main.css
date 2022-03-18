@@ -1,0 +1,30 @@
+body {background-image: url('https://images.unsplash.com/photo-1525947088131-b701cd0f6dc3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80');
+      background-repeat:repeat-y;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: 100%;
+}
+
+body .add_user {
+                margin-top:2%;
+                display: flex;
+                flex-direction: row-reverse
+}
+
+
+body .table-group {display:flex;
+                   justify-content:center}
+
+body .table-group table{width:60%;
+                        text-align:center}
+
+
+body .table table{text-align:center}
+
+body .user_buttons {display:flex;
+                    justify-content:space-around}
+
+
+body .group_buttons {display:flex;
+                     justify-content:space-around}
